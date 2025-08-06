@@ -5,7 +5,7 @@ FROM paketobuildpacks/graalvm:9.1.5
 WORKDIR /app
 
 # Copy the jar file into the container
-COPY target/your-spring-boot-app.jar /app/app.jar
+COPY target/petison-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
