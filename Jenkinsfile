@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/AnselmSchaefer/petison.git'
+                git url: 'https://github.com/AnselmSchaefer/petison.git', branch: 'main'
             }
         }
 
