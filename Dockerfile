@@ -1,5 +1,6 @@
 # Use an official OpenJDK runtime as a parent image
-FROM paketobuildpacks/graalvm:9.1.5
+#FROM paketobuildpacks/graalvm:9.1.5
+FROM openjdk:21-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
