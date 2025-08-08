@@ -1,4 +1,5 @@
 # Use a lightweight base image
+# NOT NEEDED: build image directly
 FROM arm64v8/debian:bookworm-slim
 
 # Optionally, set the working directory in the container

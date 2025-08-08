@@ -5,7 +5,7 @@ pipeline {
         DOCKER_HUB_CREDENTIALS = credentials('da98f6a8-8ea8-4d38-88b1-4fa84c846ad0')
         KUBE_CONFIG = credentials('kubeconfig')
         DOCKER_IMAGE = 'anselmschaefer/petison'
-        DOCKER_IMAGE_TAG = "1.4.0"
+        DOCKER_IMAGE_TAG = "1.5.0"
     }
 
     stages {
@@ -26,29 +26,27 @@ pipeline {
             }
         }
 
-        stage('Build Native Image') {
-            steps {
-                sh 'mvn -Pnative native:compile'
-                sh 'mvn -Pnative native:build'
-            }
-        }
-
-        stage('Build Docker Image') {
+        stage('Build & Package Native Image with Buildpacks') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}")
+                    // Configure Docker image name via Maven
+                    sh """
+                        mvn -Pnative \
+                        -Dspring-boot.build-image.imageName=${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG} \
+                        spring-boot:build-image
+                    """
                 }
             }
         }
 
         stage('Push Docker Image') {
-             steps {
-                  script {
-                       docker.withRegistry('https://registry.hub.docker.com', 'da98f6a8-8ea8-4d38-88b1-4fa84c846ad0') {
-                           docker.image("${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}").push()
-                       }
-                  }
-             }
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'da98f6a8-8ea8-4d38-88b1-4fa84c846ad0') {
+                        docker.image("${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}").push()
+                    }
+                }
+            }
         }
 
         stage('Deploy to Kubernetes') {
