@@ -26,7 +26,8 @@ pipeline {
              steps {
                   script {
                        docker.withRegistry('https://registry.hub.docker.com', 'da98f6a8-8ea8-4d38-88b1-4fa84c846ad0') {
-                       docker.image("${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}").push()
+                           docker.image("${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}").push()
+                       }
                   }
              }
         }
