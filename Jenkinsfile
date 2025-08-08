@@ -28,6 +28,7 @@ pipeline {
 
         stage('Build Native Image') {
             steps {
+                sh 'mvn -Pnative native:compile'
                 sh 'mvn -Pnative native:build'
             }
         }
