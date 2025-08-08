@@ -28,8 +28,7 @@ pipeline {
 
         stage('Build Native Image') {
             steps {
-                sh 'mvn -Pnative native:compile' // This builds the native executable
-                sh 'mvn -Pnative native:build' // This builds the native Docker image
+                sh 'mvn -Pnative native:build'
             }
         }
 

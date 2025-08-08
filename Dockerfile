@@ -1,5 +1,5 @@
 # Use a lightweight base image
-FROM alpine:latest
+FROM debian:bullseye-slim
 
 # Optionally, set the working directory in the container
 WORKDIR /app
