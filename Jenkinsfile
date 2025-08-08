@@ -15,6 +15,17 @@ pipeline {
             }
         }
 
+        stage('Set Environment') {
+            steps {
+                script {
+                    // Set JAVA_HOME and GRAALVM_HOME to the GraalVM installation directory
+                    env.JAVA_HOME = '/var/jvm/graalvm-jdk-21.0.8+12.1'
+                    env.GRAALVM_HOME = '/var/jvm/graalvm-jdk-21.0.8+12.1'
+                    env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
+                }
+            }
+        }
+        
         stage('Build Native Image') {
             steps {
                 sh 'mvn -Pnative native:compile' // This builds the native executable
