@@ -1,5 +1,5 @@
 # Use a lightweight base image
-FROM debian:bullseye-slim
+FROM arm64v8/debian:bullseye-slim
 
 # Optionally, set the working directory in the container
 WORKDIR /app
