@@ -1,0 +1,16 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: spring-boot-app
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "3"
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+        - image: anselmschaefer/petison:1.5.0
+          ports:
+            - containerPort: 8080

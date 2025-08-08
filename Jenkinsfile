@@ -49,11 +49,11 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Deploy to Knative') {
             steps {
                 script {
                     withEnv(["KUBECONFIG=${KUBE_CONFIG}"]) {
-                        sh "kubectl apply -f kubernetes-deployment.yaml"
+                        sh "kubectl apply -f knative-service.yaml"
                     }
                 }
             }
