@@ -25,11 +25,19 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Build Native Image') {
             steps {
                 sh 'mvn -Pnative native:compile' // This builds the native executable
-                sh 'mvn -Pnative native:build-image' // This builds the native Docker image
+                sh 'mvn -Pnative native:build' // This builds the native Docker image
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}")
+                }
             }
         }
 

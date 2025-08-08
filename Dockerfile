@@ -1,15 +1,14 @@
-# CURRENTLY NATIVE IMAGE => NOT USED!
-# OpenJDK runtime as a parent image
-FROM openjdk:21-jdk-slim
+# Use a lightweight base image
+FROM alpine:latest
 
-# Set the working directory in the container
+# Optionally, set the working directory in the container
 WORKDIR /app
 
-# Copy the jar file into the container
-COPY target/petison-0.0.1-SNAPSHOT.jar /app/app.jar
+# Copy the binary from the target directory into the Docker image
+COPY target/petison /app/
 
-# Expose the port the app runs on
-EXPOSE 8080
+# Make the binary executable
+RUN chmod +x /app/petison
 
-# Command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Specify the command to run your binary when the container starts
+CMD ["/app/petison"]
