@@ -6,9 +6,9 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/maxScale: "3"
-        autoscaling.knative.dev/target: "1"
+        autoscaling.knative.dev/target: "2"
     spec:
       containers:
         - image: anselmschaefer/petison:1.5.0
