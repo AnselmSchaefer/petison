@@ -3,14 +3,11 @@ kind: Ingress
 metadata:
   name: spring-boot-app-ingress
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
 spec:
   ingressClassName: traefik
-  tls:
-    - hosts:
-        - barsch.com
-      secretName: spring-boot-app-tls
   rules:
     - host: barsch.com
       http:
