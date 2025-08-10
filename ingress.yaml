@@ -7,6 +7,10 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
 spec:
+  tls:
+    - hosts:
+        - barsch.com
+      secretName: spring-boot-app-tls
   ingressClassName: traefik
   rules:
     - host: barsch.com
