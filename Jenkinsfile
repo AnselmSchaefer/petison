@@ -53,7 +53,6 @@ pipeline {
             steps {
                 script {
                     withEnv(["KUBECONFIG=${KUBE_CONFIG}"]) {
-                        sh "kubectl apply -f cluster-issuer.yaml"
                         sh "kubectl apply -f kubernetes-deployment.yaml"
                         sh "kubectl apply -f ingress.yaml"
                     }
