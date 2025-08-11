@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - barsch.com
-      secretName: spring-boot-app-tls
+    # secretName: spring-boot-app-tls
   ingressClassName: traefik
   rules:
     - host: barsch.com
