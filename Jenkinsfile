@@ -53,9 +53,24 @@ pipeline {
             steps {
                 script {
                     withEnv(["KUBECONFIG=${KUBE_CONFIG}"]) {
-                        sh "kubectl apply -f middleware-redirect.yaml"
-                        sh "kubectl apply -f kubernetes-deployment.yaml"
-                        sh "kubectl apply -f ingress.yaml"
+                        // 1. Apply Knative Service YAML (contains image, scaling, ports)
+                        sh "kubectl apply -f spring-boot-knative.yaml"
+
+                        // 2. Wait for Knative Service to be ready
+                        sh """
+                        kubectl wait ksvc spring-boot-app \
+                          --for=condition=Ready \
+                          --timeout=120s
+                        """
+
+                        // 3. Optional: Check the assigned URL
+                        sh "kubectl get ksvc spring-boot-app -o wide"
+
+                        // 4. Optional: Trigger a warm-up request so first user hit is fast
+                        sh """
+                        APP_URL=$(kubectl get ksvc spring-boot-app -o jsonpath='{.status.url}')
+                        curl -k --retry 5 --retry-delay 3 $APP_URL
+                        """
                     }
                 }
             }
