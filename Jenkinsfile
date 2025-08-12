@@ -65,12 +65,6 @@ pipeline {
 
                         // 3. Optional: Check the assigned URL
                         sh "kubectl get ksvc spring-boot-app -o wide"
-
-                        // 4. Optional: Trigger a warm-up request so first user hit is fast
-                        sh """
-                        APP_URL=$(kubectl get ksvc spring-boot-app -o jsonpath='{.status.url}')
-                        curl -k --retry 5 --retry-delay 3 $APP_URL
-                        """
                     }
                 }
             }
