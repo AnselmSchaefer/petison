@@ -11,7 +11,7 @@ spec:
         autoscaling.knative.dev/maxScale: "5"
     spec:
       containers:
-        - image: anselmschaefer/petison:1.5.0
+        - image: anselmschaefer/petison:1.6.0
           ports:
             - containerPort: 8080
           readinessProbe:
