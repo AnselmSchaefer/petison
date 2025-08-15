@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('da98f6a8-8ea8-4d38-88b1-4fa84c846ad0')
+        DOCKER_HUB_CREDENTIALS = credentials('docker')
         KUBE_CONFIG = credentials('kubeconfig')
         DOCKER_IMAGE = 'anselmschaefer/petison'
         DOCKER_IMAGE_TAG = "1.6.0"

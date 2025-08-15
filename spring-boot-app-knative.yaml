@@ -7,11 +7,12 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/minScale: "0"
-        autoscaling.knative.dev/maxScale: "5"
+        autoscaling.knative.dev/minScale: "0"            # allow scale to zero
+        autoscaling.knative.dev/maxScale: "5"            # max 5 pods
+        autoscaling.knative.dev/target: "50"             # target concurrency
     spec:
       containers:
-        - image: anselmschaefer/petison:1.6.0
+        - image: anselmschaefer/petison:1.5.0
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -21,3 +22,6 @@ spec:
             initialDelaySeconds: 30       # increase if app starts slowly
             periodSeconds: 5
             failureThreshold: 6
+          env:
+            - name: SERVER_ADDRESS
+              value: "0.0.0.0"           # ensure app listens on all interfaces
