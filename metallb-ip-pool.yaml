@@ -13,4 +13,8 @@ kind: L2Advertisement
 metadata:
   name: knative-advert
   namespace: metallb-system
-spec: {}
+spec:
+  ipAddressPools:
+    - knative-pool
+  interfaces:
+    - wlan0

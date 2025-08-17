@@ -5,7 +5,7 @@ pipeline {
         DOCKER_HUB_CREDENTIALS = credentials('docker')
         KUBE_CONFIG = credentials('kubeconfig')
         DOCKER_IMAGE = 'anselmschaefer/petison'
-        DOCKER_IMAGE_TAG = "1.7.0"
+        DOCKER_IMAGE_TAG = "1.8.0"
     }
 
     stages {

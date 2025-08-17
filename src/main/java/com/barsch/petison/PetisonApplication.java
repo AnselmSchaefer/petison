@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PetisonApplication {
 
 	@GetMapping("/api")
-	public String sampleEndpoint() {
+	public String sampleEndpoint() throws InterruptedException {
+		Thread.sleep(10000); // Sleep for 10 seconds
 		return """
         	Get busy living
         	or
