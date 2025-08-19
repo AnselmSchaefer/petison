@@ -11,7 +11,7 @@ public class PetisonApplication {
 
 	@GetMapping("/api")
 	public String sampleEndpoint() throws InterruptedException {
-		Thread.sleep(10000); // Sleep for 10 seconds
+		Thread.sleep(1000); // Sleep for 1 seconds
 		return """
         	Get busy living
         	or

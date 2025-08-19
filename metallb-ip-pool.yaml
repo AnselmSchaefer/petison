@@ -16,5 +16,3 @@ metadata:
 spec:
   ipAddressPools:
     - knative-pool
-  interfaces:
-    - wlan0
